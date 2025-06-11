@@ -1,0 +1,35 @@
+# Production configuration for Railway deployment
+ai:
+  provider: 'openai'
+  fallback_provider: 'anthropic'
+  enable_fallback: true
+  openai:
+    model: 'gpt-3.5-turbo'
+    max_tokens: 200
+    temperature: 0.7
+  anthropic:
+    model: 'claude-3-sonnet-20240229'
+    max_tokens: 200
+
+system:
+  debug: false
+  log_ai_responses: true
+  enhanced_empathy: true
+
+database:
+  name: './data/empathetic_tutor.db'
+  max_connections: 10
+  timeout: 30
+
+frustration:
+  low_threshold: 3.0
+  high_threshold: 7.0
+
+empathy:
+  personalization_enabled: true
+
+server:
+  host: '0.0.0.0'
+  port: 8000
+  workers: 1
+  reload: false

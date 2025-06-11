@@ -1,0 +1,86 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: empathetic-tutor-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://tutor:tutorpass@postgres:5432/empathetic_tutor
+      - REDIS_URL=redis://redis:6379
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8001
+    volumes:
+      - ./backend:/app/backend
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./models:/app/models
+    depends_on:
+      - postgres
+      - redis
+      - chromadb
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  postgres:
+    image: postgres:15
+    container_name: empathetic-tutor-db
+    environment:
+      - POSTGRES_USER=tutor
+      - POSTGRES_PASSWORD=tutorpass
+      - POSTGRES_DB=empathetic_tutor
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: empathetic-tutor-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  chromadb:
+    image: chromadb/chroma
+    container_name: empathetic-tutor-chromadb
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  prometheus:
+    image: prom/prometheus
+    container_name: empathetic-tutor-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+  grafana:
+    image: grafana/grafana
+    container_name: empathetic-tutor-grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+
+volumes:
+  postgres_data:
+  redis_data:
+  chroma_data:
+  prometheus_data:
+  grafana_data:

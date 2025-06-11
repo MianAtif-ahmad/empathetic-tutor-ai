@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Programming Tutor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 900px;
+            max-width: 100%;
+            height: 700px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.error {
+            background: #f44336;
+        }
+
+        .status-dot.warning {
+            background: #ff9800;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.student {
+            justify-content: flex-end;
+        }
+
+        .message.tutor {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .message.student .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.tutor .message-bubble {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-info {
+            font-size: 11px;
+            margin-top: 5px;
+            opacity: 0.7;
+        }
+
+        .empathy-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .empathy-high { background: #ffcdd2; color: #c62828; }
+        .empathy-medium { background: #fff3e0; color: #ef6c00; }
+        .empathy-standard { background: #e8f5e8; color: #2e7d32; }
+        .empathy-minimal { background: #e3f2fd; color: #1565c0; }
+
+        .input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .input-field {
+            flex: 1;
+            min-height: 50px;
+            max-height: 120px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #666;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .feedback-container {
+            display: none;
+            padding: 10px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .feedback-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .feedback-btn {
+            padding: 5px 12px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .feedback-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .message-content {
+            line-height: 1.5;
+        }
+
+        .message-content p {
+            margin: 0 0 10px 0;
+        }
+
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin: 10px 0;
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 15px;
+            background: #2d3748;
+            color: #e2e8f0;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .code-block code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+            font-family: inherit;
+        }
+
+        .inline-code {
+            background: #f1f3f4;
+            color: #d73a49;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+        }
+
+        .message.tutor .inline-code {
+            background: #f8f9fa;
+            color: #e83e8c;
+        }
+
+        .student-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .error-message {
+            display: none;
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px;
+            border-left: 4px solid #c62828;
+        }
+
+        .success-message {
+            display: none;
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .connection-status {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .connection-status.connected {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .connection-status.disconnected {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .retry-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 95vw;
+                height: 95vh;
+                margin: 2.5vh auto;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .message-bubble {
+                max-width: 85%;
+            }
+
+            .status-indicator {
+                position: static;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .student-info {
+                position: static;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <div class="student-info">
+                <div>Student: <span id="studentId">student_001</span></div>
+            </div>
+            <h1>🎓 AI Programming Tutor</h1>
+            <p>Get personalized help with your coding questions</p>
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="aiProvider">Checking connection...</span>
+            </div>
+        </div>
+
+        <div class="connection-status" id="connectionStatus" style="display: none;">
+            <span id="connectionMessage"></span>
+            <button class="retry-button" id="retryButton" onclick="checkConnection()" style="display: none;">Retry Connection</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message tutor">
+                <div class="message-bubble">
+                    <div>Hello! I'm your AI programming tutor. I'm here to help you learn to code with patience and understanding. What would you like to work on today?</div>
+                    <div class="message-info">
+                        AI Tutor • Just now
+                        <span class="empathy-indicator empathy-standard">Standard</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <div class="typing-indicator" id="typingIndicator">
+            <span>AI Tutor is thinking</span>
+            <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <div class="quick-actions">
+                <button class="quick-action" onclick="insertQuickMessage('I need help with functions')">Functions</button>
+                <button class="quick-action" onclick="insertQuickMessage('I am stuck on loops')">Loops</button>
+                <button class="quick-action" onclick="insertQuickMessage('I got an error in my code')">Error Help</button>
+                <button class="quick-action" onclick="insertQuickMessage('Can you explain this concept?')">Explain</button>
+                <button class="quick-action" onclick="insertQuickMessage('I am confused about variables')">Variables</button>
+            </div>
+            
+            <div class="input-area">
+                <textarea 
+                    id="messageInput" 
+                    class="input-field" 
+                    placeholder="Ask me anything about programming..."
+                    rows="1"
+                    onkeypress="handleKeyPress(event)"
+                    oninput="adjustTextareaHeight(this)"
+                ></textarea>
+                <button class="send-button" id="sendButton" onclick="sendMessage()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentStudentId = 'student_001';
+        let conversationHistory = [];
+        let isConnected = false;
+        
+        // Try multiple potential API URLs
+        const POTENTIAL_API_URLS = [
+            'http://localhost:8000',
+            'http://127.0.0.1:8000',
+            'http://0.0.0.0:8000'
+        ];
+        
+        let API_BASE_URL = POTENTIAL_API_URLS[0];
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStudentId();
+            checkConnection();
+            focusInput();
+        });
+
+        // Load student ID from URL params or localStorage
+        function loadStudentId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlStudentId = urlParams.get('student_id');
+            
+            if (urlStudentId) {
+                currentStudentId = urlStudentId;
+                localStorage.setItem('studentId', currentStudentId);
+            } else {
+                const savedStudentId = localStorage.getItem('studentId');
+                if (savedStudentId) {
+                    currentStudentId = savedStudentId;
+                }
+            }
+            
+            document.getElementById('studentId').textContent = currentStudentId;
+        }
+
+        // Check connection and find working API URL
+        async function checkConnection() {
+            const statusDot = document.getElementById('statusDot');
+            const aiProvider = document.getElementById('aiProvider');
+            const connectionStatus = document.getElementById('connectionStatus');
+            const connectionMessage = document.getElementById('connectionMessage');
+            const retryButton = document.getElementById('retryButton');
+
+            aiProvider.textContent = 'Checking connection...';
+            statusDot.className = 'status-dot warning';
+            
+            // Try each potential URL
+            for (const url of POTENTIAL_API_URLS) {
+                try {
+                    console.log(`Trying to connect to: ${url}`);
+                    
+                    // First try the health endpoint
+                    const healthResponse = await fetch(`${url}/health`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        // Add timeout
+                        signal: AbortSignal.timeout(5000)
+                    });
+
+                    if (healthResponse.ok) {
+                        const healthData = await healthResponse.json();
+                        console.log('Health check successful:', healthData);
+                        
+                        API_BASE_URL = url;
+                        isConnected = true;
+                        
+                        // Now check the current config
+                        try {
+                            const configResponse = await fetch(`${url}/config/current`);
+                            if (configResponse.ok) {
+                                const config = await configResponse.json();
+                                const provider = config.ai_provider || 'unknown';
+                                const providerText = getProviderDisplayName(provider);
+                                aiProvider.textContent = providerText;
+                            } else {
+                                // If config fails, try the root endpoint
+                                const rootResponse = await fetch(`${url}/`);
+                                if (rootResponse.ok) {
+                                    const rootData = await rootResponse.json();
+                                    const provider = rootData.current_provider || 'unknown';
+                                    const providerText = getProviderDisplayName(provider);
+                                    aiProvider.textContent = providerText;
+                                }
+                            }
+                        } catch (configError) {
+                            console.log('Config check failed, but health is OK:', configError);
+                            aiProvider.textContent = 'API Connected';
+                        }
+                        
+                        statusDot.className = 'status-dot';
+                        connectionStatus.style.display = 'none';
+                        return; // Success! Exit the loop
+                    }
+                } catch (error) {
+                    console.log(`Failed to connect to ${url}:`, error.message);
+                }
+            }
+            
+            // If we get here, all URLs failed
+            isConnected = false;
+            statusDot.className = 'status-dot error';
+            aiProvider.textContent = 'Connection Failed';
+            
+            connectionStatus.className = 'connection-status disconnected';
+            connectionStatus.style.display = 'block';
+            connectionMessage.textContent = 'Cannot connect to the API server. Make sure the server is running on http://localhost:8000';
+            retryButton.style.display = 'inline-block';
+        }
+
+        function getProviderDisplayName(provider) {
+            switch (provider) {
+                case 'openai': return 'OpenAI Active';
+                case 'anthropic': return 'Anthropic Active';
+                case 'local': return 'Templates Active';
+                case 'disabled': return 'AI Disabled';
+                case 'enhanced_template_only': return 'Templates Only';
+                case 'ai_system': return 'AI System Active';
+                default: return 'API Connected';
+            }
+        }
+
+        // Focus on input field
+        function focusInput() {
+            document.getElementById('messageInput').focus();
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Adjust textarea height based on content
+        function adjustTextareaHeight(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        // Insert quick message
+        function insertQuickMessage(message) {
+            document.getElementById('messageInput').value = message;
+            focusInput();
+        }
+
+        // Send message to AI tutor
+        async function sendMessage() {
+            if (!isConnected) {
+                showMessage('error', 'Not connected to server. Please check connection.');
+                return;
+            }
+
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+
+            // Disable input and show typing
+            setInputDisabled(true);
+            
+            // Add user message to chat
+            addMessageToChat('student', message);
+            
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            
+            // Show typing indicator
+            showTypingIndicator(true);
+            
+            try {
+                console.log(`Sending request to: ${API_BASE_URL}/analyze`);
+                
+                const response = await fetch(`${API_BASE_URL}/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        student_id: currentStudentId
+                    }),
+                    // Add timeout
+                    signal: AbortSignal.timeout(30000)
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('API Error Response:', errorText);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('API Success Response:', result);
+                
+                // Hide typing indicator
+                showTypingIndicator(false);
+                
+                // Add AI response to chat
+                addMessageToChat('tutor', result.response, {
+                    frustrationScore: result.frustration_score,
+                    empathyLevel: result.empathy_level,
+                    aiProvider: result.ai_provider,
+                    concepts: result.concepts,
+                    interactionId: result.interaction_id
+                });
+
+                // Show success message briefly
+                showMessage('success', 'Response generated successfully!');
+                
+            } catch (error) {
+                console.error('Error sending message:', error);
+                showTypingIndicator(false);
+                
+                let errorMessage = 'Failed to get response. ';
+                if (error.name === 'TimeoutError') {
+                    errorMessage += 'Request timed out.';
+                } else if (error.message.includes('405')) {
+                    errorMessage += 'API endpoint not found (405 error). Check if the server is running properly.';
+                } else if (error.message.includes('404')) {
+                    errorMessage += 'API endpoint not found (404 error).';
+                } else if (error.message.includes('500')) {
+                    errorMessage += 'Server error (500). Check server logs.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showMessage('error', errorMessage);
+                
+                // Add error message to chat
+                addMessageToChat('tutor', "I'm sorry, I'm having trouble responding right now. Please try again in a moment.");
+                
+                // Check if we lost connection
+                isConnected = false;
+                setTimeout(checkConnection, 2000);
+            }
+            
+            // Re-enable input
+            setInputDisabled(false);
+            focusInput();
+        }
+
+        // Add message to chat
+        function addMessageToChat(sender, message, metadata = {}) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            let empathyBadge = '';
+            if (metadata.empathyLevel) {
+                empathyBadge = `<span class="empathy-indicator empathy-${metadata.empathyLevel}">${metadata.empathyLevel}</span>`;
+            }
+
+            let senderName = sender === 'student' ? 'You' : 'AI Tutor';
+            let additionalInfo = '';
+            
+            if (sender === 'tutor' && metadata.frustrationScore !== undefined) {
+                additionalInfo = ` • Frustration: ${metadata.frustrationScore.toFixed(1)}/10`;
+                if (metadata.concepts && metadata.concepts.length > 0) {
+                    additionalInfo += ` • Topics: ${metadata.concepts.join(', ')}`;
+                }
+                if (metadata.aiProvider) {
+                    additionalInfo += ` • Provider: ${metadata.aiProvider}`;
+                }
+            }
+
+            // Process message to handle code blocks and formatting
+            let processedMessage = message;
+            if (sender === 'tutor') {
+                processedMessage = formatTutorMessage(message);
+            }
+
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <div class="message-content">${processedMessage}</div>
+                    <div class="message-info">
+                        ${senderName} • ${timeString}${additionalInfo}
+                        ${empathyBadge}
+                    </div>
+                    ${sender === 'tutor' && metadata.interactionId ? createFeedbackSection(metadata.interactionId) : ''}
+                </div>
+            `;
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Store in conversation history
+            conversationHistory.push({
+                sender,
+                message,
+                timestamp: now.toISOString(),
+                metadata
+            });
+        }
+
+        // Format tutor messages to handle code blocks properly
+        function formatTutorMessage(message) {
+            // Replace code blocks with proper formatting
+            let formatted = message
+                .replace(/```python\n([\s\S]*?)\n```/g, '<div class="code-block"><pre><code>$1</code></pre></div>')
+                .replace(/```([\s\S]*?)```/g, '<div class="code-block"><pre><code>$1</code></pre></div>')
+                .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+            
+            // Wrap in paragraph tags if not already wrapped
+            if (!formatted.includes('<p>') && !formatted.includes('<div>')) {
+                formatted = '<p>' + formatted + '</p>';
+            }
+            
+            return formatted;
+        }
+
+        // Create feedback section
+        function createFeedbackSection(interactionId) {
+            return `
+                <div class="feedback-container" id="feedback-${interactionId}">
+                    <div style="font-size: 12px; margin-bottom: 5px;">Was this response helpful?</div>
+                    <div class="feedback-buttons">
+                        <button class="feedback-btn" onclick="submitFeedback('${interactionId}', 'helpful', true)">👍 Yes</button>
+                        <button class="feedback-btn" onclick="submitFeedback('${interactionId}', 'helpful', false)">👎 No</button>
+                        <button class="feedback-btn" onclick="submitFeedback('${interactionId}', 'clear', true)">✨ Very Clear</button>
+                        <button class="feedback-btn" onclick="submitFeedback('${interactionId}', 'frustration', true)">😌 Less Frustrated</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Submit feedback
+        async function submitFeedback(interactionId, type, value) {
+            if (!isConnected) {
+                showMessage('error', 'Cannot submit feedback - not connected to server.');
+                return;
+            }
+
+            try {
+                const feedbackData = {
+                    interaction_id: interactionId,
+                    helpful: type === 'helpful' ? value : null,
+                    frustration_reduced: type === 'frustration' ? value : null,
+                    clarity_rating: type === 'clear' ? (value ? 5 : 3) : 4,
+                    additional_comments: `${type}: ${value}`
+                };
+
+                const response = await fetch(`${API_BASE_URL}/feedback`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(feedbackData),
+                    signal: AbortSignal.timeout(10000)
+                });
+
+                if (response.ok) {
+                    // Mark button as selected
+                    const button = event.target;
+                    button.classList.add('selected');
+                    button.disabled = true;
+                    
+                    // Hide feedback container after a delay
+                    setTimeout(() => {
+                        const feedbackContainer = document.getElementById(`feedback-${interactionId}`);
+                        if (feedbackContainer) {
+                            feedbackContainer.style.display = 'none';
+                        }
+                    }, 2000);
+                    
+                    showMessage('success', 'Thank you for your feedback!');
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+                showMessage('error', 'Failed to submit feedback: ' + error.message);
+            }
+        }
+
+        // Show/hide typing indicator
+        function showTypingIndicator(show) {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = show ? 'flex' : 'none';
+            
+            if (show) {
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Enable/disable input
+        function setInputDisabled(disabled) {
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+            
+            messageInput.disabled = disabled;
+            sendButton.disabled = disabled;
+        }
+
+        // Show success/error messages
+        function showMessage(type, message) {
+            const element = document.getElementById(type === 'success' ? 'successMessage' : 'errorMessage');
+            element.textContent = message;
+            element.style.display = 'block';
+            
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        // Debug function to test connection
+        function debugConnection() {
+            console.log('Current API URL:', API_BASE_URL);
+            console.log('Connection status:', isConnected);
+            
+            // Test the root endpoint
+            fetch(`${API_BASE_URL}/`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Root endpoint response:', data);
+                })
+                .catch(error => {
+                    console.error('Root endpoint error:', error);
+                });
+        }
+
+        // Expose debug function globally
+        window.debugConnection = debugConnection;
+        window.checkConnection = checkConnection;
+    </script>
+</body>
+</html>

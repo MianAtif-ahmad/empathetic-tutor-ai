@@ -1,0 +1,46 @@
+{
+  "high_impact": {
+    "weight": 2.5,
+    "keywords": ["fuck", "shit", "damn", "hell", "impossible", "hate", "stupid", "giving up", "quit", "worst", "terrible"]
+  },
+  "medium_impact": {
+    "weight": 2.0,
+    "keywords": ["stuck", "frustrated", "angry", "annoying", "difficult", "hard", "broken"]
+  },
+  "mild_impact": {
+    "weight": 1.0,
+    "keywords": ["confused", "don't understand", "lost", "help", "struggling", "unclear"]
+  },
+  "error_phrases": {
+    "weight": 1.5,
+    "keywords": ["not working", "doesn't work", "won't work", "isn't working", "doesn't working"]
+  },
+  "error_words": {
+    "weight": 1.5,
+    "keywords": ["error", "exception", "crash", "bug", "broken", "failed", "traceback"]
+  },
+  "syntax_indicators": {
+    "weight": 1.5,
+    "keywords": ["syntax", "colon", "parentheses", "braces", "indentation", "=", "==", "missing", "quote", "definition", "statement"]
+  },
+  "logic_errors": {
+    "weight": 1.8,
+    "keywords": ["returns none", "never executes", "runs forever", "infinite loop", "out of range", "undefined but"]
+  },
+  "emotional_distress": {
+    "weight": 3.0,
+    "keywords": ["overwhelmed", "not smart enough", "feel stupid", "feel like", "makes me feel", "self doubt", "not good at"]
+  },
+  "gratitude": {
+    "weight": -2.0,
+    "keywords": ["thank", "thanks", "appreciate", "grateful", "best tutor", "you're great"]
+  },
+  "positive_emotions": {
+    "weight": -1.0,
+    "keywords": ["excited", "proud", "love", "enjoy", "fantastic", "great"]
+  },
+  "casual_slang": {
+    "weight": 1.5,
+    "keywords": ["dude", "totally", "ain't", "yo"]
+  }
+}

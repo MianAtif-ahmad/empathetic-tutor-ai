@@ -1,0 +1,12 @@
+{
+  "loops": ["for", "while", "loop", "iterate", "iteration", "range", "infinite", "forever"],
+  "functions": ["function", "def", "return", "parameter", "argument", "call", "decorator", "lambda", "print"],
+  "variables": ["variable", "var", "assignment", "value", "store", "undefined", "declare"],
+  "conditionals": ["if", "else", "elif", "condition", "boolean", "true", "false", "comparison"],
+  "recursion": ["recursion", "recursive", "base case", "call itself"],
+  "errors": ["error", "exception", "traceback", "bug", "debug", "syntax", "broken", "help", "issue", "problem", "fix"],
+  "classes": ["class", "object", "method", "self", "init", "instance", "oop"],
+  "lists": ["list", "array", "index", "append", "element", "comprehension"],
+  "dictionaries": ["dict", "dictionary", "key", "value", "hash"],
+  "strings": ["string", "str", "text", "character", "concatenate", "quote", "print", "hello"]
+}

@@ -1,0 +1,142 @@
+# config_manager.py - Final Version
+import yaml
+import os
+from typing import Dict, Any
+
+class ConfigManager:
+    """
+    Simple configuration manager for AI provider settings
+    """
+    
+    def __init__(self, config_file: str = "config.yaml"):
+        self.config_file = config_file
+        self.config = self._load_config()
+        
+    def _load_config(self) -> Dict[str, Any]:
+        """Load configuration from YAML file"""
+        try:
+            if os.path.exists(self.config_file):
+                with open(self.config_file, 'r') as file:
+                    config = yaml.safe_load(file)
+                    print(f"✅ Configuration loaded from {self.config_file}")
+                    return config
+            else:
+                print(f"⚠️  Config file {self.config_file} not found, creating default")
+                default_config = self._get_default_config()
+                self._save_config_to_file(default_config)
+                return default_config
+        except Exception as e:
+            print(f"❌ Error loading config: {e}")
+            return self._get_default_config()
+    
+    def _get_default_config(self) -> Dict[str, Any]:
+        """Default configuration if file doesn't exist"""
+        return {
+            'ai': {
+                'provider': 'openai',
+                'fallback_provider': 'local',
+                'enable_fallback': True,
+                'openai': {
+                    'model': 'gpt-4',
+                    'max_tokens': 200,
+                    'temperature': 0.7,
+                    'timeout': 10
+                },
+                'anthropic': {
+                    'model': 'claude-3-sonnet-20240229',
+                    'max_tokens': 200,
+                    'timeout': 10
+                }
+            },
+            'system': {
+                'debug': True,
+                'log_ai_responses': True,
+                'enhanced_empathy': True
+            },
+            'database': {
+                'name': 'empathetic_tutor.db'
+            },
+            'frustration': {
+                'low_threshold': 3.0,
+                'high_threshold': 7.0
+            },
+            'empathy': {
+                'emotional_memory': True,
+                'learning_style_detection': True,
+                'personalization_enabled': True
+            }
+        }
+    
+    def get_ai_provider(self) -> str:
+        """Get the current AI provider setting"""
+        return self.config.get('ai', {}).get('provider', 'openai')
+    
+    def get_fallback_provider(self) -> str:
+        """Get the fallback AI provider"""
+        return self.config.get('ai', {}).get('fallback_provider', 'local')
+    
+    def is_fallback_enabled(self) -> bool:
+        """Check if fallback is enabled"""
+        return self.config.get('ai', {}).get('enable_fallback', True)
+    
+    def get_openai_config(self) -> Dict[str, Any]:
+        """Get OpenAI configuration"""
+        return self.config.get('ai', {}).get('openai', {})
+    
+    def get_anthropic_config(self) -> Dict[str, Any]:
+        """Get Anthropic configuration"""
+        return self.config.get('ai', {}).get('anthropic', {})
+    
+    def is_enhanced_empathy_enabled(self) -> bool:
+        """Check if enhanced empathy is enabled"""
+        return self.config.get('empathy', {}).get('personalization_enabled', True)
+    
+    def set_ai_provider(self, provider: str):
+        """Change AI provider and save to file"""
+        valid_providers = ['openai', 'anthropic', 'local', 'disabled']
+        if provider not in valid_providers:
+            raise ValueError(f"Invalid provider. Must be one of: {valid_providers}")
+        
+        self.config['ai']['provider'] = provider
+        self._save_config()
+        print(f"✅ AI provider changed to: {provider}")
+    
+    def _save_config(self):
+        """Save current configuration to file"""
+        self._save_config_to_file(self.config)
+    
+    def _save_config_to_file(self, config_data: Dict[str, Any]):
+        """Save configuration data to file"""
+        try:
+            with open(self.config_file, 'w') as file:
+                yaml.dump(config_data, file, default_flow_style=False, indent=2)
+            print(f"✅ Configuration saved to {self.config_file}")
+        except Exception as e:
+            print(f"❌ Error saving config: {e}")
+    
+    def print_current_config(self):
+        """Print current configuration"""
+        print("\n🔧 CURRENT CONFIGURATION:")
+        print(f"   AI Provider: {self.get_ai_provider()}")
+        print(f"   Fallback Provider: {self.get_fallback_provider()}")
+        print(f"   Fallback Enabled: {self.is_fallback_enabled()}")
+        print(f"   Enhanced Empathy: {self.is_enhanced_empathy_enabled()}")
+        print(f"   Debug Mode: {self.config.get('system', {}).get('debug', False)}")
+
+# Global configuration instance
+config = ConfigManager()
+
+# Test function
+def test_config():
+    """Test the configuration manager"""
+    print("🧪 Testing Configuration Manager")
+    print("=" * 50)
+    
+    # Print current config
+    config.print_current_config()
+    
+    print(f"\nConfig file exists: {os.path.exists('config.yaml')}")
+    print(f"Available providers: openai, anthropic, local, disabled")
+
+if __name__ == "__main__":
+    test_config()

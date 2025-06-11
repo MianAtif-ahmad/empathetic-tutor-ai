@@ -1,0 +1,28 @@
+{
+  "frustration_caps": {
+    "max_score": 10.0,
+    "min_score": 0.0
+  },
+  "punctuation_weights": {
+    "exclamation_weight": 0.5,
+    "exclamation_max": 2.0,
+    "question_weight": 0.3,
+    "question_max": 1.0,
+    "caps_weight": 3.0
+  },
+  "empathy_thresholds": {
+    "high": 7.0,
+    "medium": 4.0,
+    "minimal": 2.0
+  },
+  "intervention_levels": {
+    "level_1_max": 3.0,
+    "level_2_max": 7.0,
+    "level_3_min": 7.0
+  },
+  "response_settings": {
+    "short_response_max_tokens": 80,
+    "long_response_max_tokens": 150,
+    "complex_code_threshold": 100
+  }
+}

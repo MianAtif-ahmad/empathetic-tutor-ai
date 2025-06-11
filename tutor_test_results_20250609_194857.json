@@ -1,0 +1,951 @@
+{
+  "summary": {
+    "total": 50,
+    "passed": 24,
+    "failed": 26,
+    "success_rate": 48.0
+  },
+  "categories": {
+    "High Frustration (1-5)": {
+      "passed": 4,
+      "total": 5
+    },
+    "Medium Frustration (6-10)": {
+      "passed": 3,
+      "total": 5
+    },
+    "Low Frustration (11-15)": {
+      "passed": 5,
+      "total": 5
+    },
+    "Syntax Errors (16-20)": {
+      "passed": 0,
+      "total": 5
+    },
+    "Complex Code (21-25)": {
+      "passed": 1,
+      "total": 5
+    },
+    "Logic Errors (26-30)": {
+      "passed": 0,
+      "total": 5
+    },
+    "Concepts (31-35)": {
+      "passed": 4,
+      "total": 5
+    },
+    "Vocabulary (36-40)": {
+      "passed": 3,
+      "total": 5
+    },
+    "Emotional (41-45)": {
+      "passed": 2,
+      "total": 5
+    },
+    "Edge Cases (46-50)": {
+      "passed": 2,
+      "total": 5
+    }
+  },
+  "detailed_results": [
+    {
+      "case_num": 1,
+      "description": "High frustration - profanity",
+      "message": "What the fuck is wrong with this stupid print function?!",
+      "frustration_score": 6.853571428571429,
+      "expected_frustration": [
+        6,
+        10
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions",
+        "strings"
+      ],
+      "response": "I see you're frustrated. Let's work through this together. Could you share the code snippet causing the issue? I'm here to help you fix it.",
+      "empathy_level": "medium",
+      "passed": true
+    },
+    {
+      "case_num": 2,
+      "description": "High frustration - caps and strong language",
+      "message": "I HATE PYTHON! Nothing works! This is impossible!",
+      "frustration_score": 8.295918367346939,
+      "expected_frustration": [
+        8,
+        10
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "I understand your frustration. Let's work through this together. What specific issue are you facing in your Python code right now? Share the problem, and we'll tackle it step by step. You've got this!",
+      "empathy_level": "high",
+      "passed": true
+    },
+    {
+      "case_num": 3,
+      "description": "High frustration - giving up",
+      "message": "I'm giving up on this shit. Loops are fucking impossible to understand.",
+      "frustration_score": 10.0,
+      "expected_frustration": [
+        7,
+        10
+      ],
+      "concepts": [
+        "loops"
+      ],
+      "expected_concepts": [
+        "loops"
+      ],
+      "response": "I understand loops can be challenging, but you can do this! Let's work on it together. What specific issue are you facing with loops in Python? Share your code, and we'll tackle it step by step.",
+      "empathy_level": "high",
+      "passed": true
+    },
+    {
+      "case_num": 4,
+      "description": "High frustration - persistent error",
+      "message": "This goddamn error keeps showing up and I can't fix it!",
+      "frustration_score": 5.109090909090909,
+      "expected_frustration": [
+        6,
+        9
+      ],
+      "concepts": [
+        "errors"
+      ],
+      "expected_concepts": [
+        "errors"
+      ],
+      "response": "I understand the frustration. Let's work through it together. Please share the error message and the code snippet causing the issue so we can resolve it step by step.",
+      "empathy_level": "medium",
+      "passed": false
+    },
+    {
+      "case_num": 5,
+      "description": "High frustration - time pressure",
+      "message": "Why is programming so damn hard?! I've been stuck for hours!",
+      "frustration_score": 8.4,
+      "expected_frustration": [
+        7,
+        10
+      ],
+      "concepts": [
+        "loops"
+      ],
+      "expected_concepts": [],
+      "response": "I understand your frustration. Let's work through this together. What specific Python problem are you facing right now?",
+      "empathy_level": "high",
+      "passed": true
+    },
+    {
+      "case_num": 6,
+      "description": "Medium frustration - explicit",
+      "message": "I'm really stuck on this loop and getting frustrated.",
+      "frustration_score": 4.056603773584905,
+      "expected_frustration": [
+        4,
+        7
+      ],
+      "concepts": [
+        "loops",
+        "strings"
+      ],
+      "expected_concepts": [
+        "loops"
+      ],
+      "response": "I understand loops can be tricky. Could you share the loop code you're struggling with? Let's work on it together.",
+      "empathy_level": "medium",
+      "passed": true
+    },
+    {
+      "case_num": 7,
+      "description": "Medium frustration - mild profanity",
+      "message": "This is annoying. The if statement isn't working right.",
+      "frustration_score": 5.109090909090909,
+      "expected_frustration": [
+        3,
+        6
+      ],
+      "concepts": [
+        "conditionals"
+      ],
+      "expected_concepts": [
+        "conditionals"
+      ],
+      "response": "I understand your frustration. Let's fix the if statement issue. Could you share the code snippet causing the problem?",
+      "empathy_level": "medium",
+      "passed": true
+    },
+    {
+      "case_num": 8,
+      "description": "Medium frustration - confusion",
+      "message": "I'm confused about functions. This is harder than I thought.",
+      "frustration_score": 3.15,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "I understand functions can be tricky at first, but you'll get the hang of it! Remember, functions are like recipes - they take input, do something, and return output. Here's a simple example to help:\n\n```python\ndef greet(name):\n    return \"Hello, \" + name + \"!\"\n\nmessage = greet(\"Sarah\")\nprint(message)\n```",
+      "empathy_level": "standard",
+      "passed": true
+    },
+    {
+      "case_num": 9,
+      "description": "Medium frustration - help seeking",
+      "message": "Help! My code is broken and I don't know why.",
+      "frustration_score": 5.2,
+      "expected_frustration": [
+        3,
+        6
+      ],
+      "concepts": [],
+      "expected_concepts": [
+        "errors"
+      ],
+      "response": "I'm here to help! Please share your code so I can assist you in fixing it.",
+      "empathy_level": "medium",
+      "passed": false
+    },
+    {
+      "case_num": 10,
+      "description": "Medium frustration - error confusion",
+      "message": "This error message doesn't make sense. So frustrating!",
+      "frustration_score": 2.111111111111111,
+      "expected_frustration": [
+        4,
+        7
+      ],
+      "concepts": [
+        "errors",
+        "strings"
+      ],
+      "expected_concepts": [
+        "errors"
+      ],
+      "response": "I understand your frustration. Let's work through it together. Please share the error message and the code snippet causing the issue. We'll figure it out step by step.",
+      "empathy_level": "standard",
+      "passed": false
+    },
+    {
+      "case_num": 11,
+      "description": "Low frustration - polite inquiry",
+      "message": "Can you help me understand how for loops work?",
+      "frustration_score": 1.365217391304348,
+      "expected_frustration": [
+        0,
+        3
+      ],
+      "concepts": [
+        "loops"
+      ],
+      "expected_concepts": [
+        "loops"
+      ],
+      "response": "Of course! For loops iterate over a sequence (like a list) and execute the block of code for each item in the sequence. Here's an example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfor fruit in fruits:\n    print(fruit)\n```\n\nThis code will print each fruit in the list `fruits`.",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 12,
+      "description": "Low frustration - curiosity",
+      "message": "I'm curious about list comprehensions in Python.",
+      "frustration_score": 0.125,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "lists"
+      ],
+      "expected_concepts": [
+        "lists"
+      ],
+      "response": "List comprehensions are a concise way to create lists. They consist of brackets containing an expression followed by a for clause, then zero or more for or if clauses. \n\nHere's an example to create a list of squares from 0 to 9:\n```python\nsquares = [x**2 for x in range(10)]\nprint(squares)\n```",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 13,
+      "description": "Low frustration - comparison question",
+      "message": "Could you explain the difference between lists and tuples?",
+      "frustration_score": 0.35172413793103446,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "conditionals",
+        "lists"
+      ],
+      "expected_concepts": [
+        "lists"
+      ],
+      "response": "Absolutely! In Python, lists are mutable, meaning you can change their elements after creation using methods like append or remove. Tuples, on the other hand, are immutable, so once created, you can't change their elements. Here's a simple example:\n\n```python\n# List example\nmy_list = [1, 2, 3]\nmy_list.append(4)\nprint(my_list",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 14,
+      "description": "Low frustration - learning interest",
+      "message": "I'd like to learn more about functions and parameters.",
+      "frustration_score": 0.05555555555555555,
+      "expected_frustration": [
+        0,
+        3
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "Functions in Python allow you to group code that you want to reuse. Parameters are values you pass to a function. Here's an example:\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name + \"!\")\n    \ngreet(\"Sarah\")\n```\n\nThis function `greet` takes a `name` parameter and prints a greeting with that name.",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 15,
+      "description": "Low frustration - best practices",
+      "message": "What's the best way to handle exceptions in Python?",
+      "frustration_score": 1.9176470588235295,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "errors"
+      ],
+      "expected_concepts": [
+        "errors"
+      ],
+      "response": "The best way to handle exceptions in Python is by using try-except blocks. This allows you to catch and handle specific errors gracefully.\n\nHere's an example:\n```python\ntry:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Error: Cannot divide by zero\")\n```",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 16,
+      "description": "Syntax error - braces vs parentheses",
+      "message": "print{hello} isn't working. What am I doing wrong?",
+      "frustration_score": 6.42,
+      "expected_frustration": [
+        1,
+        4
+      ],
+      "concepts": [],
+      "expected_concepts": [
+        "functions",
+        "strings"
+      ],
+      "response": "I see the issues! You need to use parentheses () instead of curly braces {} for the print function.\n\nHere's the corrected code:\n```python\nprint(\"hello\")\n```",
+      "empathy_level": "medium",
+      "passed": false
+    },
+    {
+      "case_num": 17,
+      "description": "Syntax error - missing colon",
+      "message": "for i in range(10) print(i) # Missing colon",
+      "frustration_score": 0.06976744186046512,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "loops"
+      ],
+      "expected_concepts": [
+        "loops"
+      ],
+      "response": "I see the issues! You need a colon after the range(10) statement for the loop to work.\n\nHere's the corrected code:\n```python\nfor i in range(10):\n    print(i)\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 18,
+      "description": "Syntax error - assignment vs comparison",
+      "message": "if x = 5: print('five') # Wrong assignment",
+      "frustration_score": 0.07142857142857142,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "variables",
+        "conditionals"
+      ],
+      "expected_concepts": [
+        "conditionals"
+      ],
+      "response": "I see the issues! You need to use double equals (==) for comparison instead of a single equals sign (=) for assignment.\n\nHere's the corrected code:\n```python\nif x == 5:\n    print('five')\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 19,
+      "description": "Syntax error - function definition",
+      "message": "def my_function() return 5 # Missing colon",
+      "frustration_score": 0.07142857142857142,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "I see the issue! You need a colon after the function definition.\n\nHere's the corrected code:\n```python\ndef my_function():\n    return 5\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 20,
+      "description": "Syntax error - string quotes",
+      "message": "print('Hello world') # Missing closing quote",
+      "frustration_score": 3.1363636363636362,
+      "expected_frustration": [
+        1,
+        4
+      ],
+      "concepts": [],
+      "expected_concepts": [
+        "strings"
+      ],
+      "response": "I see the issue! You're missing the closing quote. \n\nHere's the corrected code:\n```python\nprint('Hello world')\n```",
+      "empathy_level": "standard",
+      "passed": false
+    },
+    {
+      "case_num": 21,
+      "description": "Complex - multiple syntax errors",
+      "message": "My loop isn't working:\nfor i in range(5)\n    print(i)\n    if i = 3\n        print('three')",
+      "frustration_score": 3.033707865168539,
+      "expected_frustration": [
+        3,
+        6
+      ],
+      "concepts": [
+        "loops",
+        "conditionals"
+      ],
+      "expected_concepts": [
+        "loops",
+        "conditionals"
+      ],
+      "response": "I see the issues! You need:\n1. Use a colon at the end of the `for` statement and the `if` statement.\n2. Use double equals `==` for comparison in the `if` statement.\n\nHere's the corrected code:\n```python\nfor i in range(5):\n    print(i)\n    if i == 3:\n        print('three')\n```",
+      "empathy_level": "standard",
+      "passed": true
+    },
+    {
+      "case_num": 22,
+      "description": "Complex - function syntax issues",
+      "message": "This function has problems:\ndef calculate(x, y)\n    result = x + y\n    return result",
+      "frustration_score": 0.03571428571428571,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "I see the issues! You need to add a colon after the function definition and indent the code inside the function.\n\nHere's the corrected code:\n```python\ndef calculate(x, y):\n    result = x + y\n    return result\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 23,
+      "description": "Complex - wrong operator",
+      "message": "List comprehension not working:\nnumbers = [1, 2, 3, 4, 5]\nsquared = [x^2 for x in numbers]",
+      "frustration_score": 1.5333333333333334,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "loops",
+        "lists"
+      ],
+      "expected_concepts": [
+        "lists"
+      ],
+      "response": "I see the issues! You need to use ** for exponentiation in Python instead of ^.\n\nHere's the corrected code:\n```python\nnumbers = [1, 2, 3, 4, 5]\nsquared = [x**2 for x in numbers]\nprint(squared)\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 24,
+      "description": "Complex - wrong exception syntax",
+      "message": "Exception handling broken:\ntry:\n    result = 10 / 0\ncatch Exception as e:\n    print(e)",
+      "frustration_score": 5.069767441860465,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "errors"
+      ],
+      "expected_concepts": [
+        "errors"
+      ],
+      "response": "I see the issues! You need:\n1. Use \"except\" instead of \"catch\"\n2. Use \"as\" instead of \"as\"\n\nHere's the corrected code:\n```python\ntry:\n    result = 10 / 0\nexcept Exception as e:\n    print(e)\n```",
+      "empathy_level": "medium",
+      "passed": false
+    },
+    {
+      "case_num": 25,
+      "description": "Complex - class syntax errors",
+      "message": "Class definition issues:\nclass MyClass\n    def __init__(self, value)\n        self.value = value",
+      "frustration_score": 0.09473684210526316,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "functions",
+        "variables",
+        "classes",
+        "dictionaries"
+      ],
+      "expected_concepts": [
+        "classes"
+      ],
+      "response": "I see the issues! You need:\n1. Add a colon after the class name.\n2. Add colons after the method definitions.\n\nHere's the corrected code:\n```python\nclass MyClass:\n    def __init__(self, value):\n        self.value = value\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 26,
+      "description": "Logic error - infinite loop",
+      "message": "My loop runs forever. How do I fix infinite loops?",
+      "frustration_score": 0.48,
+      "expected_frustration": [
+        3,
+        6
+      ],
+      "concepts": [
+        "loops",
+        "classes"
+      ],
+      "expected_concepts": [
+        "loops"
+      ],
+      "response": "I understand the frustration. To fix infinite loops, ensure your loop condition will eventually become false. Double-check loop variables and conditions. Consider using a counter or a break statement. Here's an example:\n\n```python\n# Example with a counter\ncounter = 0\nwhile counter < 5:\n    print(counter)\n    counter += 1\n```\n\nThis loop will run 5 times and",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 27,
+      "description": "Logic error - return issue",
+      "message": "The function returns None instead of the calculation.",
+      "frustration_score": 0.11320754716981132,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "I see the issue! You need to use the `return` statement to return the calculation result. \n\nHere's the corrected code:\n```python\ndef calculate_sum(a, b):\n    return a + b\n\nresult = calculate_sum(3, 4)\nprint(result)\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 28,
+      "description": "Logic error - condition issue",
+      "message": "My if statement never executes the else block.",
+      "frustration_score": 0.06521739130434782,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "conditionals"
+      ],
+      "expected_concepts": [
+        "conditionals"
+      ],
+      "response": "I understand your frustration. Remember, in Python, indentation is crucial for if-else blocks. Make sure the else block is at the same indentation level as the if block. \n\nHere's an example to illustrate:\n```python\nx = 5\nif x > 10:\n    print(\"x is greater than 10\")\nelse:\n    print(\"x is 10 or less\")\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 29,
+      "description": "Logic error - index error",
+      "message": "The list index is out of range. What does that mean?",
+      "frustration_score": 0.41538461538461535,
+      "expected_frustration": [
+        3,
+        6
+      ],
+      "concepts": [
+        "loops",
+        "lists"
+      ],
+      "expected_concepts": [
+        "lists",
+        "errors"
+      ],
+      "response": "It means you're trying to access an index in a list that doesn't exist. Python lists start at index 0, so if you try to access an index beyond the length of the list, you'll get this error. Check your index values to stay within the range of the list.\n\nExample:\n```python\nmy_list = [1, 2, 3]\nprint(my_list[",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 30,
+      "description": "Logic error - scope issue",
+      "message": "My variable is undefined but I declared it.",
+      "frustration_score": 0.13953488372093023,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [
+        "functions",
+        "variables"
+      ],
+      "expected_concepts": [
+        "variables"
+      ],
+      "response": "I understand your frustration. Let's ensure the variable is declared before using it. Remember to assign a value to the variable during declaration or before using it. \n\nExample:\n```python\n# Declaration and assignment\nmy_variable = 10\n\n# Now you can use my_variable\nprint(my_variable)\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 31,
+      "description": "Concept - data structures",
+      "message": "What's the difference between a list and a dictionary?",
+      "frustration_score": 0.3555555555555555,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "conditionals",
+        "lists",
+        "dictionaries"
+      ],
+      "expected_concepts": [
+        "lists",
+        "dictionaries"
+      ],
+      "response": "In Python, a list is an ordered collection of items accessed by index, while a dictionary is an unordered collection of key-value pairs accessed by keys. \n\nHere are examples to illustrate the difference:\n\nList:\n```python\nmy_list = [1, 2, 3, 4]\nprint(my_list[0])  # Accessing by index\n```\n\nDictionary:\n```python\nmy",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 32,
+      "description": "Concept - advanced functions",
+      "message": "How do lambda functions work in Python?",
+      "frustration_score": 0.45384615384615384,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "functions"
+      ],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "Lambda functions in Python are anonymous functions defined using the `lambda` keyword. They are typically used for short, simple operations. Here's an example of a lambda function that adds two numbers:\n\n```python\nadd = lambda x, y: x + y\nresult = add(3, 4)\nprint(result)  # Output: 7\n```",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 33,
+      "description": "Concept - OOP",
+      "message": "Explain object-oriented programming concepts.",
+      "frustration_score": 0.06666666666666667,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "classes"
+      ],
+      "expected_concepts": [
+        "classes"
+      ],
+      "response": "In object-oriented programming (OOP), you create classes to represent objects with attributes and behaviors. Objects are instances of classes. Encapsulation hides the internal state of objects. Inheritance allows classes to inherit attributes and methods from other classes. Polymorphism enables objects to be treated as instances of their parent class. \n\nHere's a simple example:\n```python\nclass Animal:\n    def __init__(",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 34,
+      "description": "Concept - decorators",
+      "message": "What are decorators and how do I use them?",
+      "frustration_score": 0.44285714285714284,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [
+        "functions"
+      ],
+      "response": "Decorators are functions that modify the behavior of other functions. To use them, define a decorator function that takes a function as an argument, performs some action, and returns a new function. Then, use the @ symbol followed by the decorator function name above the function you want to decorate.\n\nExample:\n```python\ndef my_decorator(func):\n    def wrapper():\n        print(\"Something is happening before the",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 35,
+      "description": "Concept - advanced topic",
+      "message": "How does Python handle memory management?",
+      "frustration_score": 0.44634146341463415,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "In Python, memory management is handled automatically through a mechanism called garbage collection. Python uses reference counting and a cycle-detecting garbage collector to manage memory. When an object is no longer referenced, Python's garbage collector automatically deallocates the memory used by that object. This helps prevent memory leaks and makes memory management easier for developers.",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 36,
+      "description": "Casual - informal language",
+      "message": "Yo, this code ain't working, help me out!",
+      "frustration_score": 1.5731707317073171,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "Of course! Please share your code so I can help you better.",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 37,
+      "description": "Formal - polite language",
+      "message": "Excuse me, I require assistance with this algorithm.",
+      "frustration_score": 0.11538461538461539,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "Of course! I'm here to help. Please share the algorithm or code snippet you're working on, and let's tackle it together.",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 38,
+      "description": "Casual - slang",
+      "message": "Dude, my script is totally broken!",
+      "frustration_score": 4.088235294117647,
+      "expected_frustration": [
+        3,
+        6
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "I'm here to help! What seems to be the issue with your script? Please share the code or describe the problem you're facing.",
+      "empathy_level": "medium",
+      "passed": true
+    },
+    {
+      "case_num": 39,
+      "description": "Formal - academic tone",
+      "message": "I would appreciate guidance on this programming challenge.",
+      "frustration_score": 0.05172413793103448,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "Of course! Please share the details of the programming challenge you're facing, and I'll do my best to help you through it.",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 40,
+      "description": "Casual - mild frustration",
+      "message": "Ugh, this bug is driving me crazy!",
+      "frustration_score": 2.088235294117647,
+      "expected_frustration": [
+        4,
+        7
+      ],
+      "concepts": [
+        "errors"
+      ],
+      "expected_concepts": [
+        "errors"
+      ],
+      "response": "I understand how frustrating bugs can be. Please share the code snippet causing the issue so we can work on fixing it together.",
+      "empathy_level": "standard",
+      "passed": false
+    },
+    {
+      "case_num": 41,
+      "description": "Emotional - overwhelmed",
+      "message": "I'm feeling overwhelmed by all these Python concepts.",
+      "frustration_score": 0.11320754716981132,
+      "expected_frustration": [
+        4,
+        7
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "It's normal to feel overwhelmed, but remember, you're making progress! Let's focus on one concept at a time. What specific Python topic is causing confusion? I'm here to help you break it down.",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 42,
+      "description": "Emotional - positive",
+      "message": "I'm excited to learn more about programming!",
+      "frustration_score": 0.5681818181818181,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "That's fantastic to hear! Let's start with a simple Python exercise to get you going. How about we create a program that prints \"Hello, World!\"? It's a classic beginner's task that can help you get familiar with Python syntax. Would you like to give it a try?",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 43,
+      "description": "Emotional - self-doubt",
+      "message": "I feel like I'm not smart enough for programming.",
+      "frustration_score": 0.12244897959183673,
+      "expected_frustration": [
+        5,
+        8
+      ],
+      "concepts": [
+        "loops"
+      ],
+      "expected_concepts": [],
+      "response": "I understand how you feel, but remember, programming is about problem-solving, not innate intelligence. You can improve with practice. Let's work on a Python problem together to boost your confidence. What coding challenge would you like help with today?",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 44,
+      "description": "Emotional - negative self-talk",
+      "message": "This makes me feel really stupid and confused.",
+      "frustration_score": 4.065217391304348,
+      "expected_frustration": [
+        5,
+        8
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "I understand it can be frustrating, but don't worry, you're not alone. Let's tackle this together. What specific Python problem are you facing right now?",
+      "empathy_level": "medium",
+      "passed": false
+    },
+    {
+      "case_num": 45,
+      "description": "Emotional - achievement",
+      "message": "I'm proud that I solved the last problem!",
+      "frustration_score": 0.6463414634146342,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "That's fantastic! What's the next challenge you'd like to tackle in Python?",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 46,
+      "description": "Edge case - minimal input",
+      "message": "?",
+      "frustration_score": 0.3,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "I'm here to help! What Python coding challenge are you facing today?",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 47,
+      "description": "Edge case - very long input",
+      "message": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "frustration_score": 0.0,
+      "expected_frustration": [
+        1,
+        4
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "I see you're trying to print a long string. In Python, you can simply use print() to display it. \n\nHere's an example:\n```python\nlong_string = \"a\" * 200\nprint(long_string)\n```",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 48,
+      "description": "Edge case - repetitive",
+      "message": "Help help help help help help help",
+      "frustration_score": 1.088235294117647,
+      "expected_frustration": [
+        2,
+        5
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "I'm here to help! What Python coding challenge are you facing right now?",
+      "empathy_level": "minimal",
+      "passed": false
+    },
+    {
+      "case_num": 49,
+      "description": "Edge case - math not code",
+      "message": "12345 + 67890 = ?",
+      "frustration_score": 0.3,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [],
+      "expected_concepts": [],
+      "response": "To add numbers in Python, use the `+` operator. \n\nHere's how you can add 12345 and 67890:\n```python\nresult = 12345 + 67890\nprint(result)\n```\n\nWhen you run this code, it will output:\n80235",
+      "empathy_level": "minimal",
+      "passed": true
+    },
+    {
+      "case_num": 50,
+      "description": "Edge case - gratitude",
+      "message": "Thanks for all your help! You're the best tutor!",
+      "frustration_score": 2.125,
+      "expected_frustration": [
+        0,
+        2
+      ],
+      "concepts": [
+        "loops"
+      ],
+      "expected_concepts": [],
+      "response": "I'm glad to help! What Python coding challenge are you currently facing? Let's tackle it together.",
+      "empathy_level": "standard",
+      "passed": false
+    }
+  ]
+}
